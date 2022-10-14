@@ -1,0 +1,9 @@
+pandas : 데이터 2중배열처리(테이블로 만듦)
+Series : 1중 배열
+DataFrame : 다중배열
+seaborn : 데이터 시각화, 샘플용데이터 사용(별로 안중요)
+sklearn : TreeClassifier  
+           MLPClassifier 
+
+독립변수 - 
+종속변수 - 
