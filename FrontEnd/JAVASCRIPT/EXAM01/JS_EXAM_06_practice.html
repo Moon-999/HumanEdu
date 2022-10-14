@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+       //JSON 연습
+       let exam1 = '{"id" : 1, "title" : "MOON"}';
+       let data1 = JSON.parse(exam1);
+       console.log(data1);
+
+       let exam2 = {"id" : 2, "title" : "SUN"};
+       let data2 = JSON.parse(JSON.stringify(exam2));
+       console.log(data2);
+       document.write(exam1);   //''문자열로 묶여있기 때문에 호출 가능.
+       document.write("<br>");  //문자열이 아니기 때문에 Object로 표현됨.
+       document.write(exam2);
+       document.write("<br>");
+
+       let exam3 = '{"id" : 3, "title": "Boksil"}';
+       let data3 = JSON.parse(exam3);
+       console.log(data3);
+       document.write(exam3);
+       document.write("<br>");
+
+       let exam4 = {"id" : 4, "title" : "Rami"};
+       let data4 = JSON.parse(JSON.stringify(exam4));
+       console.log(data4);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

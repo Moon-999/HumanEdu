@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container{
+            display: flex;
+            flex-direction: column;
+        }
+        header{
+            border-bottom: 1px solid gray;
+            padding-left: 20px;
+        }
+        footer{
+            border-top: 1px solid gray;
+            padding-left: 20px;
+        }
+        .content{
+            display: flex;
+            flex-direction: row;
+        }
+        .content nav{
+            border-right: 1px solid gray;
+        }
+        .content main{
+            padding: 10px;
+        }
+        .content aside{
+            border-left: 1px solid gray;
+        }
+        nav, aside{
+            flex-basis: 150px;
+            flex-shrink: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>휴먼교육센터</h1>
+        </header>
+        <section class="content">
+            <nav>
+                <ul>
+                    <li>학원소개</li>
+                    <li>과정소개</li>
+                    <li>게시판</li>
+                </ul>
+            </nav>
+            <main>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, numquam fugit non, itaque beatae voluptate sunt officia earum doloribus dolorum, labore in unde eveniet eos ab. Harum obcaecati id aut!
+                Amet ab dicta alias. Cumque maiores sapiente ipsam reprehenderit repellat quis molestias ullam magnam magni omnis consequuntur laudantium eaque aut voluptates, quidem pariatur eius culpa, corrupti aliquid perspiciatis, adipisci temporibus!
+                Illo porro id eligendi voluptas earum, error eaque eveniet odio debitis tenetur alias rerum quasi harum, ab repudiandae officiis, pariatur fuga non repellat vero veritatis temporibus? Repellat tempore nesciunt tenetur?
+            </main>
+            <aside>
+                AD:~~
+            </aside>
+        </section>
+        <footer>
+            <a href="www.human.or.kr">학원홈페이지</a>
+        </footer>
+    </div>
+</body>
+</html>

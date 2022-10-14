@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function(){
+            //이벤트를 한개씩 적용하는 케이스
+            //case1 : 마우스 오버
+            // $(".btn1 a").mouseover(function(){
+            //     alert("휴먼교육센터1");
+            // });
+            //case2 : 마우스 클릭
+            // $(".btn1 a").click(function(){
+            //     alert("휴먼교육센터1");
+            // });
+
+            //여러개의 이벤트를 동시에 코딩가능.
+            //2개 중 한개의 이벤트가 발생할 경우 아래의 function이 수행됨.
+            $(".btn1 a").on("mouseover click", function(){
+                let ts = $(this);  //this는 선택된 대상.(=>선택된 객체(태그))
+                ts.css("background-color","yellow");
+                //=> $(this).css("background-color","yellow");
+                $(".btn1").next("ul").filter(":visible").hide();
+                //선택된 태그((".btn1").next("ul")) 주체 중에 visible인 상태이면 hide시켜라.
+                ts.parent().next().show();
+                //선택된 태그의 부모 다음의 것(ul)을 보여라.
+                // 보이고 나서 숨기는 것을 하면 다 숨겨버려서 변화가 보이지 않음.
+                //=>꼭 다 숨기는 것 다음에 보이는 것 실행.
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <p class="btn1">
+        <a href="#">이벤트 대상1</a>
+    </p>
+    <ul style="display: none;">
+        <li>리스트1</li>
+        <li>리스트2</li>
+        <li>리스트3</li>
+    </ul>
+    <p class="btn1">
+        <a href="#">이벤트 대상2</a>
+    </p>
+    <ul style="display: none;">
+        <li>리스트4</li>
+        <li>리스트5</li>
+        <li>리스트6</li>
+    </ul>
+</body>
+</html>

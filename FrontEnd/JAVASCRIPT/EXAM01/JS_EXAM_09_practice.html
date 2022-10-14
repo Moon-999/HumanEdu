@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      let add1 = new Function("x,y", "return x+y");
+      document.write(add1(3,4));
+      document.write("<br>");
+
+      let add2 = function(x,y){
+        return x+y;
+      }
+      document.write(add2(4,5));
+      document.write("<br>");
+
+      function add3(x,y){
+        return x+y;
+      }
+      document.write(add3(6,7));
+      document.write("<br>");
+
+      function add4(x,y){
+        return x-y;
+      }
+      // document.write(add4(6,3));
+      // document.write("<br>");
+      document.write(add4(6,7));
+      document.write("<br>");
+
+      function add5(x,y){
+        console.log(arguments);
+        console.log(arguments[1], arguments[2], arguments[5]);
+        return x+y;
+      }
+      document.write(add5(8,9));
+      document.write("<br>");
+      document.write(add5(1,2,3,4,5,6,"hello"));
+      document.write("<br>");
+      
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

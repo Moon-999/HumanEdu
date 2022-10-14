@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            background-color: blueviolet;
+        }
+        #human1{
+            background-color: aqua;
+        }
+        .human2{
+            background-color: blue;
+        }
+        h2[id]{
+            background-color: darkgreen;
+        }
+        h2[class]{
+            background-color:chartreuse;
+        }
+        h2[dir="a"]{
+            background-color: rgb(rgb(255, 153, 0), green, blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- id=#/ class=. -->
+    <h1>휴먼교육센터1</h1>
+    <h1>휴먼교육센터2</h1>
+    <h1 id="human1">휴먼교육센터3</h1>
+    <h1 id="human1">휴먼교육센터4</h1>
+    <h1 class="human2">휴먼교육센터5</h1>
+    <h1 class="human2">휴먼교육센터6</h1>
+    <h1 id="human1"class="human2">휴먼교육센터7</h1>
+    <h2 id="human1">휴먼교육센터8</h2>
+    <h2 class="human2">휴먼교육센터9</h2>
+    <!-- 우선순위 : (1)id -(2)속성[id]-(3)속성[class]-(4)class-(5)tag -->
+    <h2 id="human1">휴먼교육센터10</h2>  
+    <h2 class="human2">휴먼교육센터11</h2>
+
+    <h2 dir="a" class="human2" >휴먼교육센터11</h2>
+
+</body>
+</html>
