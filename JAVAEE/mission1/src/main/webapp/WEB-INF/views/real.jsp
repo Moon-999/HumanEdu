@@ -37,10 +37,26 @@
 	<div align="right" style="margin-right:100px; margin-top:20px; margin-bottom:20px;">
 		<input type="button" id="select" name="select" value="조회">&nbsp;&nbsp;
 		<input type="button" id="add" name="add" value="저장">&nbsp;&nbsp;
-		<input type="button" id="download" name="download" value="엑셀다운" onclick='document.location="/excels";' >&nbsp;&nbsp;
+		<input type="button" id="download" name="download" value="엑셀다운" onclick='document.location="/excels?id="+$("#id").val()+"&name="+$("#name").val();'  >&nbsp;&nbsp;
+		<!--값 2개 이상 보낼때에는 document.location="/경로?보낼변수명=" + 값 + "&보낼변수명2=" + 값 ..... ; -->
 		<input type="button" id="resetbtn" name="resetbtn" value="삭제">  
 	</div>
-	<table align=center id="table" style="border:2px solid black; width:700px; height:500px">
+	<table align=center  id="table" style="border:2px solid black; width:900px; ">
+		<colgroup>
+
+			<col style="width:5%;" />
+
+			<col style="width:15%;" />
+
+			<col style="width:15%;" />
+			
+			<col style="width:15%;" />
+
+			<col style="width:25%;" />
+
+			<col style="width:25%;" />
+
+		</colgroup>
 		<thead>
 			<tr>
 				<th style='text-align:left'>선택</th>
@@ -96,6 +112,7 @@ $(document)
 .on('click', '#add', function(){
 	if($('input:checkbox[name="check"]').is(":checked") ==  false){ //insert
 		//if 절에 input[name=check]:not(:checked)이거 들어가도 원래 됐었는데 이제 안됨 ㅠ
+		//$('input:checkbox[name="check"]').is(":checked") ==  false
 		$.post('http://localhost:8083/addlist',
 				{id:$('#id').val(),name:$('#name').val(),gender:$('#gender:checked').val(), country:$('#country').val(), city:$('#city').val()},
 					function(){
@@ -108,7 +125,7 @@ $(document)
 				{id:$('#id').val(),name:$('#name').val(),gender:$('#gender:checked').val(), country:$('#country').val(), city:$('#city').val()},
 					function(){
 						console.log('id: '+$('#id').val());
-						getlist();
+						getselectlist();
 			},'text');
 	}
 })
@@ -151,10 +168,6 @@ $(document)
 	})
 	
 })
-//.on('click','#download',function(){
-	//$.post('http://localhost:8083/excels');
-	//console.log("download");
-//})
 
 .on('click','#select',function(){
 	if(!$("#id").val()==''){
@@ -258,6 +271,22 @@ function getlist(){
 			$('#country').val('나라');
 			$("input:radio[name='gender']").prop('checked', false);
 		},'json');
+}
+
+function getselectlist(){
+	$('#list').empty();
+	$.post('http://localhost:8083/selectlist',{id:$('#id').val()},function(rcv){
+		<!--아작스 호출 코드 => $.post( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
+		<!--get방식 => $.get( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
+			console.log(rcv);
+			for(i=0; i<rcv.length; i++){
+				let str="<tr><td><input type='checkbox' class='chkbox' name='check'></td><td>"+rcv[i]['id']+'</td><td>'+rcv[i]['name']+'</td><td>'+rcv[i]['gender']+'</td><td>'+rcv[i]['country']+'</td><td>'+rcv[i]['city']+'</td></tr>';
+				$('#list').append(str);
+			}
+			$('#id,#name,#start,#end,#city').val('');
+			$('#country').val('나라');
+			$("input:radio[name='gender']").prop('checked', false);
+	},'json');
 }
 
 </script>

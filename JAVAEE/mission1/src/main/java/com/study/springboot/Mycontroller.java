@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -110,7 +111,7 @@ public class Mycontroller {
 	@RequestMapping("/selectlist")
 	@ResponseBody 
 	public String selectlist(HttpServletRequest req) {
-		ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"));
+		ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name"));
 		JSONArray ja = new JSONArray();
 		for(int i=0; i<mdto.size(); i++) {
 			JSONObject jo = new JSONObject();
@@ -126,7 +127,7 @@ public class Mycontroller {
 	
 	
 	@RequestMapping("/excels")
-	public void download(HttpServletResponse response) throws IOException {
+	public void download(HttpServletRequest req, HttpServletResponse response) throws IOException {
 		    	
 				Workbook wb = new XSSFWorkbook();
 		        Sheet sheet = wb.createSheet("게시판 정보");
@@ -139,7 +140,8 @@ public class Mycontroller {
 		        headerRow.createCell(3).setCellValue("나라");
 		        headerRow.createCell(4).setCellValue("도시");
 		 
-		        ArrayList<Mdto> mdto = mdao.getList();
+		        ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name")); 
+		        //500에러가 왜 나는것일까유,,? mdao.getList();는 에러 안나고 잘 됨 ㅠ
 		        for (Mdto board : mdto) {
 		            Row bodyrow = sheet.createRow(rowNum++);
 		            bodyrow.createCell(0).setCellValue(board.getId());
@@ -147,6 +149,7 @@ public class Mycontroller {
 		            bodyrow.createCell(2).setCellValue(board.getGender());
 		            bodyrow.createCell(3).setCellValue(board.getCountry());
 		            bodyrow.createCell(4).setCellValue(board.getCity());
+		            System.out.println(board.getId());
 		        }
 		        
 		        // Download

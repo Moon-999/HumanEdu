@@ -10,5 +10,5 @@ public interface Mdao {
 	ArrayList<Mdto> getList();
 	void updatelist(String id, String name, String gender, String country, String city);
 	void deletelist(String id);
-	ArrayList<Mdto> selectlist(String id);
+	ArrayList<Mdto> selectlist(String id, String name);
 }
