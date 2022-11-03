@@ -111,7 +111,7 @@ public class Mycontroller {
 	@RequestMapping("/selectlist")
 	@ResponseBody 
 	public String selectlist(HttpServletRequest req) {
-		ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name"));
+		ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name"),req.getParameter("gender"),req.getParameter("country"),req.getParameter("city"));
 		JSONArray ja = new JSONArray();
 		for(int i=0; i<mdto.size(); i++) {
 			JSONObject jo = new JSONObject();
@@ -140,8 +140,8 @@ public class Mycontroller {
 		        headerRow.createCell(3).setCellValue("나라");
 		        headerRow.createCell(4).setCellValue("도시");
 		 
-		        ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name")); 
-		        //500에러가 왜 나는것일까유,,? mdao.getList();는 에러 안나고 잘 됨 ㅠ
+		        ArrayList<Mdto> mdto = mdao.selectlist(req.getParameter("id"),req.getParameter("name"),req.getParameter("gender"),req.getParameter("country"),req.getParameter("city")); 
+		       
 		        for (Mdto board : mdto) {
 		            Row bodyrow = sheet.createRow(rowNum++);
 		            bodyrow.createCell(0).setCellValue(board.getId());

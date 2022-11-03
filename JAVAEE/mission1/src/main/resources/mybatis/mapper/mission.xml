@@ -18,6 +18,22 @@
 		delete from mission1 where id=#{param1}
 	</delete>
 	<select id="selectlist" resultType="com.study.springboot.jdbc.Mdto">
-		select id, name, gender, country, city from mission1 where id=#{param1}
+		select id, name, gender, country, city from mission1 
+		<where>
+		<if test='param1 != null and param1 != ""'>AND id = #{param1} </if>
+		<if test='param2 != null and param2 != ""'>AND name = #{param2} </if>
+		<if test='param3 != null and param3 != ""'>AND gender = #{param3} </if>
+		<if test='param4 != null and param4 != "나라"'>AND country = #{param4} </if>
+		<if test='param5 != null and param5 != "도시"'>AND city = #{param5} </if>
+		</where>
+		<!-- 
+		<trim prefix="WHERE" prefixOverrides="AND">
+  		<if test='param1 != null and param1 != ""'>AND id = #{param1} </if>
+		<if test='param2 != null and param2 != ""'>AND name = #{param2} </if>
+		<if test='param3 != null and param3 != "male"'>AND gender = #{param3} </if>
+		<if test='param4 != null and param4 != "나라"'>AND country = #{param4} </if>
+		<if test='param5 != null and param5 != "도시"'>AND city = #{param5} </if>
+		</trim>
+		 -->
 	</select>
 </mapper>

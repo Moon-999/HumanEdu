@@ -12,6 +12,7 @@
 	<div>
 		<input type = "text" style="width:200px; height:35px; margin:10px 30px" id="id" name="id" placeholder="id">
 		<input type = "text" style="width:200px; height:35px; margin:10px 60px" id="name" name="name" placeholder="name">
+		<input type = "hidden" id="gender" name="gender">
 		<input type = "radio" id="gender" name="gender" value="male"><label for="male">남</label>
 		<input type = "radio" id="gender" name="gender" value="female"><label for="female">여</label>  
 	</div>
@@ -37,7 +38,7 @@
 	<div align="right" style="margin-right:100px; margin-top:20px; margin-bottom:20px;">
 		<input type="button" id="select" name="select" value="조회">&nbsp;&nbsp;
 		<input type="button" id="add" name="add" value="저장">&nbsp;&nbsp;
-		<input type="button" id="download" name="download" value="엑셀다운" onclick='document.location="/excels?id="+$("#id").val()+"&name="+$("#name").val();'  >&nbsp;&nbsp;
+		<input type="button" id="download" name="download" value="엑셀다운" onclick='document.location="/excels?id="+$("#id").val()+"&name="+$("#name").val()+"&gender="+$("#gender:checked").val()+"&country="+$("#country").val()+"&city="+$("#city").val();'  >&nbsp;&nbsp;
 		<!--값 2개 이상 보낼때에는 document.location="/경로?보낼변수명=" + 값 + "&보낼변수명2=" + 값 ..... ; -->
 		<input type="button" id="resetbtn" name="resetbtn" value="삭제">  
 	</div>
@@ -57,6 +58,7 @@
 			<col style="width:25%;" />
 
 		</colgroup>
+		
 		<thead>
 			<tr>
 				<th style='text-align:left'>선택</th>
@@ -170,46 +172,52 @@ $(document)
 })
 
 .on('click','#select',function(){
-	if(!$("#id").val()==''){
+	//if(!$("#id").val()==''){
 		$('#list').empty();
-		$.post('http://localhost:8083/selectlist',{id:$('#id').val()},function(rcv){
+		$.post('http://localhost:8083/selectlist',{id:$('#id').val(),name:$('#name').val(),gender:$('#gender:checked').val(), country:$('#country').val(), city:$('#city').val()},function(rcv){
 			<!--아작스 호출 코드 => $.post( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
 			<!--get방식 => $.get( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
 				console.log(rcv);
+				console.log($('#id').val());
+				console.log($('#name').val());
+				console.log($('#gender').val());
+				console.log($('#country').val());
+				console.log($('#city').val());
+				
 				for(i=0; i<rcv.length; i++){
 					let str="<tr><td><input type='checkbox' class='chkbox' name='check'></td><td>"+rcv[i]['id']+'</td><td>'+rcv[i]['name']+'</td><td>'+rcv[i]['gender']+'</td><td>'+rcv[i]['country']+'</td><td>'+rcv[i]['city']+'</td></tr>';
 					$('#list').append(str);
 				}
 		},'json');
-	}
-	else{
-		var rowData = new Array();
-		var tdArr = new Array();
-		var checkbox = $("input[name=check]:checked");
+	//}
+	//else{
+		//var rowData = new Array();
+		//var tdArr = new Array();
+		//var checkbox = $("input[name=check]:checked");
 		
 		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
+		//checkbox.each(function(i) {
 
 			// checkbox.parent() : checkbox의 부모는 <td>이다.
 			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-		var tr = checkbox.parent().parent().eq(i);
-		var td = tr.children();
+		//var tr = checkbox.parent().parent().eq(i);
+		//var td = tr.children();
 			
 			// 체크된 row의 모든 값을 배열에 담는다.
-		rowData.push(tr.text());
+		//rowData.push(tr.text());
 			
 			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-		var id = td.eq(1).text();
-		var name = td.eq(2).text();
-		var gender = td.eq(3).text();
-		var country = td.eq(4).text();
-		var city = td.eq(5).text();
+		//var id = td.eq(1).text();
+		//var name = td.eq(2).text();
+		//var gender = td.eq(3).text();
+		//var country = td.eq(4).text();
+		//var city = td.eq(5).text();
 			
 			// 가져온 값을 배열에 담는다.
-		tdArr.push(id);
-		tdArr.push(name);
-		tdArr.push(gender);
-		tdArr.push(country);
+		//tdArr.push(id);
+		//tdArr.push(name);
+		//tdArr.push(gender);
+		/* tdArr.push(country);
 		tdArr.push(city);
 			
 		console.log("id : " + id);
@@ -246,18 +254,16 @@ $(document)
 					opt.innerHTML = d[tr];
 					target.appendChild(opt);
 				}
-			}
+			} */
 			//ncaught TypeError: Cannot read properties of undefined (reading 'indexOf')왜날까..
 			
-	})
+	//})
 	
 			
 				
-	})
-		//나라는 데이터대로 표시가 되는데 도시는 안됨 ㅜㅜ
-	$('#city').val(tdArr[4]);
-	
-	}
+	//})
+		
+	//}
 	
 })
 function getlist(){
@@ -275,7 +281,7 @@ function getlist(){
 
 function getselectlist(){
 	$('#list').empty();
-	$.post('http://localhost:8083/selectlist',{id:$('#id').val()},function(rcv){
+	$.post('http://localhost:8083/selectlist',{id:$('#id').val(),name:$('#name').val(),gender:$('#gender:checked').val(), country:$('#country').val(), city:$('#city').val()},function(rcv){
 		<!--아작스 호출 코드 => $.post( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
 		<!--get방식 => $.get( url(RequestMapping, 서버에 보내는 입력, function(서버로부터 받은 출력), 'json or text or xml'(수신데이터포맷)    -->
 			console.log(rcv);
